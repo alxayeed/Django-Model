@@ -1,0 +1,63 @@
+Company.objects
+Company.objects.all()
+
+languages = Language.objects.all()
+print(languages)
+print(type(languages))
+languages[0]
+languages[0].creator
+
+Language.objects.filter(name__exact='Python')
+Language.objects.filter(name__exact='python') #blank
+Language.objects.filter(name__iexact='python')#case insensitive
+Language.objects.filter(name__exact='Python').filter(creator='N/A')
+
+Language.objects.exclude(name__exact='Python')
+
+Programmer.objects.filter(age__gt=20)
+Programmer.objects.filter(age>20) #error
+Programmer.objects.filter(age=24)
+Programmer.objects.filter(age__gte=20)
+Programmer.objects.filter(age__lt=20)
+Programmer.objects.filter(age__lte=20)
+Programmer.objects.filter(age__lte=20)
+
+Programmer.objects.filter(name__contains='a')
+Programmer.objects.filter(name__icontains='A') #case insensitive
+
+Programmer.objects.filter(name__in=['Al','Anik','Shanta'])
+Programmer.objects.filter(name__in={'Al','Anik','Shanta'})
+Programmer.objects.exclude(name__in={'Al','Anik','Shanta'})
+
+Programmer.objects.filter(name__startswith='A')
+Programmer.objects.filter(name__endswith='A')
+Programmer.objects.filter(name__isnull=True)
+Programmer.objects.filter(name__isnull=False)
+
+Programmer.objects.count()
+Programmer.objects.filter(name__startswith='A').count()
+Programmer.objects.exclude(name__startswith='A').count()
+
+al = Programmer.objects.filter(name__exact='Al Xayeed').get() #returns object
+al = Programmer.objects.filter(name__exact='Al Xayeed') #returns Queryset
+al[0]
+al[0].name
+
+Programmer.objects.filter(name__startswith='A').get() #error - multiple objects
+Programmer.objects.filter(name__startswith='X').get() # error - no objects
+
+Programmer.objects.all()[:]
+Programmer.objects.all()[1:]
+Programmer.objects.all()[1:-1] #error - Negative indexing not supported
+Programmer.objects.all()[:]
+
+Company.objects.filter(date_created__gt= '1990-01-01')
+
+Programmer.objects.order_by('name') #ascending
+Programmer.objects.order_by('-name') #decending
+Company.objects.order_by('date_created')
+
+python = Language.objects.filter(name__exact= 'Python').get()
+python.programmer_set
+python.programmer_set.all()
+
